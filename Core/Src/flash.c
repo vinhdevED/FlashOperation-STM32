@@ -50,7 +50,7 @@ void Flash_Write_Int(uint32_t addr, int data){
 
 uint16_t Flash_Read_Int(uint32_t addr)
 {
-	uint16_t* val = (uint16_t *)addr;
+	uint16_t* val = (uint16_t *)addr; // Cast type address from uint32_t
 	return *val;
 }
 
