@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "flash.h"
 
 /* USER CODE END Includes */
 
@@ -31,7 +32,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define DATA_START_ADDRESS 		 	((uint32_t)0x0801FC00)	//Page 127
+#define LENGTH_START_ADDRESS 		((uint32_t)0x0801F810)	//Page 126
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -42,6 +44,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+char data[50] = {0};
 
 /* USER CODE END PV */
 
@@ -86,6 +89,11 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+  Flash_ProgramPage("First data written to flash", DATA_START_ADDRESS, LENGTH_START_ADDRESS);
+  Flash_ReadChar(data, DATA_START_ADDRESS, LENGTH_START_ADDRESS);
+  HAL_Delay(2000);
+  Flash_ProgramPage("New data",DATA_START_ADDRESS,LENGTH_START_ADDRESS);
+  Flash_ReadChar(data,DATA_START_ADDRESS,LENGTH_START_ADDRESS);
 
   /* USER CODE END 2 */
 
